@@ -22,6 +22,7 @@ export class TodoList extends Component {
         </ul>
         <button
           className="btn btn-block btn-danger text-capitalize my-3"
+          disabled={items.length !== 0 ? false : true}
           onClick={clearList}
         >
           clear list

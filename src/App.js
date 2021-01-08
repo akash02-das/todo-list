@@ -24,14 +24,12 @@ class App extends Component {
     };
     const updatedItems = [...this.state.items, newItem];
 
-    if (this.state.item.length > 0) {
-      this.setState({
-        items: updatedItems,
-        item: "",
-        id: uuidv4(),
-        editItem: false,
-      });
-    }
+    this.setState({
+      items: updatedItems,
+      item: "",
+      id: uuidv4(),
+      editItem: false,
+    });
   };
 
   clearList = () => {
@@ -39,7 +37,14 @@ class App extends Component {
   };
 
   handleEdit = (id) => {
-    console.log(`Edit Item ${id}`);
+    const filterItem = this.state.items.filter((item) => item.id !== id);
+    const findItem = this.state.items.find((item) => item.id === id);
+    this.setState({
+      items: filterItem,
+      item: findItem.title,
+      id: id,
+      editItem: true,
+    });
   };
 
   handleDelete = (id) => {
