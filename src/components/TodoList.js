@@ -6,25 +6,27 @@ export class TodoList extends Component {
     const { items, handleEdit, handleDelete, clearList } = this.props;
 
     return (
-      <ul className="list-group my-5">
+      <div className="my-5">
         <h2 className="text-success text-center text-capitalize">todo list</h2>
-        {items.map((item) => {
-          return (
-            <TodoItem
-              key={item.id}
-              title={item.title}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
-          );
-        })}
+        <ul className="list-group">
+          {items.map((item) => {
+            return (
+              <TodoItem
+                key={item.id}
+                title={item.title}
+                handleEdit={() => handleEdit(item.id)}
+                handleDelete={() => handleDelete(item.id)}
+              />
+            );
+          })}
+        </ul>
         <button
-          className="btn btn-block btn-danger text-capitalize my-5"
+          className="btn btn-block btn-danger text-capitalize my-3"
           onClick={clearList}
         >
           clear list
         </button>
-      </ul>
+      </div>
     );
   }
 }
