@@ -34,8 +34,8 @@ class App extends Component {
     }
   };
 
-  clearList = (e) => {
-    console.log("Clear List");
+  clearList = () => {
+    this.setState({ items: [] });
   };
 
   handleEdit = (id) => {
@@ -43,7 +43,8 @@ class App extends Component {
   };
 
   handleDelete = (id) => {
-    console.log(`Delete Item ${id}`);
+    const deleteItem = this.state.items.filter((item) => item.id !== id);
+    this.setState({ items: deleteItem });
   };
 
   render() {
