@@ -6,21 +6,32 @@ import TodoList from "./components/TodoList";
 
 class App extends Component {
   state = {
-    items: [
-      { id: 1, title: "wake up" },
-      { id: 2, title: "take lunch" },
-    ],
+    items: [],
     id: uuidv4(),
     item: "",
     editItem: false,
   };
 
   handleChange = (e) => {
-    console.log("Handle Change");
+    this.setState({ item: e.target.value });
   };
 
   addItem = (e) => {
-    console.log("Add Item");
+    e.preventDefault();
+    const newItem = {
+      id: this.state.id,
+      title: this.state.item,
+    };
+    const updatedItems = [...this.state.items, newItem];
+
+    if (this.state.item.length > 0) {
+      this.setState({
+        items: updatedItems,
+        item: "",
+        id: uuidv4(),
+        editItem: false,
+      });
+    }
   };
 
   clearList = (e) => {
@@ -40,7 +51,9 @@ class App extends Component {
       <div className="container">
         <div className="row">
           <div className="col-10 col-md-8 mx-auto mt-4">
-            <h3 className="text-capitalize text-center">Todo Input</h3>
+            <h2 className="text-capitalize text-center text-primary">
+              Todo Input
+            </h2>
             <TodoInput
               item={this.state.item}
               handleChange={this.handleChange}
